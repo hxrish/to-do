@@ -29,7 +29,8 @@ appender(upperContainer.getDiv(), addContent.getDiv());
 appender(heroContainer, upperContainer.getDiv());
 appender(heroContainer, lowerContainer.getDiv());
 
+
+
 document.getElementById('svg').addEventListener('click', () => {
-    const newDiv = document.createElement('div');
-    appender(lowerContainer.getDiv(), newDiv);
+
 })

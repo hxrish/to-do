@@ -1,5 +1,8 @@
 import './index.css';
 import logo from './Vector.svg';
+import { pastContainer, presentContainer, futureContainer } from './timeline';
+import { projectHeader } from './projects';
+import { createElement } from './newToDo';
 
 
 //Assign variables
@@ -60,6 +63,17 @@ function leftBottomChild(div){
     return leftBottom.appendChild(div);
 }
 
+function leftBottomTopChild(div){
+    return leftBottomTop.appendChild(div);
+}
+
+function leftBottomDownChild(div){
+    return leftBottomDown.appendChild(div);
+}
+
+// function rightBottomChild(div){
+//     return rightBottomChild.appendChild(div);
+// }
 
 heroContainerChild(header);
 heroContainerChild(accentCircle1);
@@ -86,3 +100,15 @@ headerTxt.appendChild(headerMainTxtContainer);
 
 addAnythingCircle.innerText = '+';
 addAnything.appendChild(addAnythingCircle);
+
+leftBottomTopChild(pastContainer);
+leftBottomTopChild(presentContainer);
+leftBottomTopChild(futureContainer);
+
+leftBottomDownChild(projectHeader);
+
+addAnythingCircle.addEventListener('click', () => {
+    createElement()
+})
+
+export {rightBottom};

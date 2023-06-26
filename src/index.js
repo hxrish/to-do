@@ -1,36 +1,88 @@
 import './index.css';
-const heroContainer = document.getElementById('mainContent');
+import logo from './Vector.svg';
 
-class divCreator{
-    constructor(name){
-       this.value = document.createElement('div');
-        this.value.id = name;
-    }
 
-    getDiv(){
-        return this.value;
-    }
+//Assign variables
+let heroContainer = document.getElementById('mainContent');
+let header = document.createElement('div');
+header.id = "header";
+let mainLogo = document.createElement('div');
+mainLogo.id = "mainLogo";
+let headerTxt = document.createElement('div');
+headerTxt.id = "headerTxt";
+let addAnything = document.createElement('div');
+addAnything.id = "addAnything";
+let accentCircle1 = document.createElement('div');
+accentCircle1.id = "accentCircle1";
+let accentCircle2 = document.createElement('div');
+accentCircle2.id = "accentCircle2";
+let accentCircle3 = document.createElement('div');
+accentCircle3.id = "accentCircle3";
+let bottomContainer = document.createElement('div');
+bottomContainer.id = "bottomContainer";
+let leftBottom = document.createElement('div');
+leftBottom.id = "leftBottom";
+let rightBottom = document.createElement('div');
+rightBottom.id = "rightBottom";
+let leftBottomTop = document.createElement('div');
+leftBottomTop.id = "leftBottomTop";
+let leftBottomDown = document.createElement('div');
+leftBottomDown.id = "leftBottomDown";
+let mainLogoImage = new Image();
+mainLogoImage.src = logo;
+mainLogoImage.id = "mainLogoImage";
+let mainLogoContainer = document.createElement('div');
+mainLogoContainer.id = 'mainLogoContainer';
+let mainLogoTxtContainer = document.createElement('div');
+mainLogoTxtContainer.id = 'mainLogoTxtContainer';
+
+
+let headerMainTxtContainer = document.createElement('div');
+headerMainTxtContainer.id = 'headerMainTxtContainer';
+
+let addAnythingCircle = document.createElement('div');
+addAnythingCircle.id = 'addAnythingCircle';
+
+
+function heroContainerChild(div){
+    return heroContainer.appendChild(div);
 }
 
-function appender(element, elementToBeAppended){
-    return element.appendChild(elementToBeAppended);
+function headerChild(div){
+    return header.appendChild(div);
 }
 
-let upperContainer = new divCreator('upperContainer');
-let lowerContainer = new divCreator('lowerContainer');
-let addContent = new divCreator('addContent');
-addContent.getDiv().innerHTML = `<svg id="svg" xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-6 h-6">
-<path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-</svg>
-`;
+function bottomContainerChild(div){
+    return bottomContainer.appendChild(div);
+}
+
+function leftBottomChild(div){
+    return leftBottom.appendChild(div);
+}
 
 
-appender(upperContainer.getDiv(), addContent.getDiv()); 
-appender(heroContainer, upperContainer.getDiv());
-appender(heroContainer, lowerContainer.getDiv());
+heroContainerChild(header);
+heroContainerChild(accentCircle1);
+heroContainerChild(accentCircle2);
+heroContainerChild(accentCircle3);
+heroContainerChild(bottomContainer);
+bottomContainerChild(leftBottom);
+bottomContainerChild(rightBottom);
+headerChild(mainLogo);
+headerChild(headerTxt);
+headerChild(addAnything);
+leftBottomChild(leftBottomTop);
+leftBottomChild(leftBottomDown);
 
 
+mainLogoTxtContainer.innerText = "TODO";
+mainLogo.appendChild(mainLogoTxtContainer);
+mainLogoContainer.appendChild(mainLogoImage);
+mainLogo.appendChild(mainLogoContainer);
 
-document.getElementById('svg').addEventListener('click', () => {
 
-})
+headerMainTxtContainer.innerText = 'Today';
+headerTxt.appendChild(headerMainTxtContainer);
+
+addAnythingCircle.innerText = '+';
+addAnything.appendChild(addAnythingCircle);

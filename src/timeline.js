@@ -1,14 +1,14 @@
 let pastContainer = document.createElement('div');
 pastContainer.id = 'pastContainer';
-pastContainer.innerText = 'HULULULUKKUKUJKU';
+pastContainer.innerText = 'Past';
 
 let presentContainer = document.createElement('div');
 presentContainer.id = 'presentContainer';
-presentContainer.innerText = 'HOWAOWOAHwa';
+presentContainer.innerText = 'Today';
 
 let futureContainer = document.createElement('div');
 futureContainer.id = 'futureContainer';
-futureContainer.innerText = 'JKBSOGBOSG';
+futureContainer.innerText = 'Future';
  
 
 export {pastContainer, presentContainer, futureContainer};

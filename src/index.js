@@ -3,6 +3,7 @@ import logo from './Vector.svg';
 import { pastContainer, presentContainer, futureContainer } from './timeline';
 import { projectHeader } from './projects';
 import { createElement } from './newToDo';
+import { popupContainer } from './popup';
 
 
 //Assign variables
@@ -108,7 +109,8 @@ leftBottomTopChild(futureContainer);
 leftBottomDownChild(projectHeader);
 
 addAnythingCircle.addEventListener('click', () => {
-    createElement()
+    heroContainer.appendChild(popupContainer);
 })
 
 export {rightBottom};
+export {heroContainer};

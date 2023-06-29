@@ -1,4 +1,6 @@
 import { heroContainer } from ".";
+import { todo } from "./newToDo";
+import { popupContainer } from "./popup";
 
 let formParent = document.createElement('form');
 formParent.id = 'formParent';
@@ -85,4 +87,12 @@ closeBtn.addEventListener('click', () => {
 
 })
 
+submitBtn.addEventListener('click', () => {
+    // console.log(taskDescription.value);
+    let element = new todo(taskTitle.value, taskDescription.value, taskDate.value);
+    heroContainer.removeChild(popupContainer);
+    element.addTodo();
+})
+
 export { formParent }
+export { popupContainer }

@@ -1,37 +1,70 @@
-import { rightBottom} from ".";
+import { format } from "date-fns";
+import { rightBottom, todoContainer } from ".";
+
 
 import Frame from './Frame.svg';
 
-function createElement(){
-    let elementContainer = document.createElement('div');
-    elementContainer.classList.add('elementContainer');
 
-    let checkCircle = document.createElement('input');
-    checkCircle.type = 'checkbox';
-    checkCircle.classList.add('checkCircle');
+let todoArray =  [];
 
-    let elementTitle = document.createElement('div');
-    elementTitle.classList.add('elementTitle');
-    elementTitle.innerText = 'holo';
+    class todo {
+        constructor(title, description, date) {
+            this.elementContainer = document.createElement('div'
+            );  
+            this.elementContainer.classList.add('elementContainer');
 
-    let elementDetails = document.createElement('div');
-    elementDetails.id = 'elementDetails';
+            this.checkCircle = document.createElement('input');
+            this.checkCircle.type = 'checkbox';
+            this.checkCircle.classList.add('checkCircle');
 
-    let trashbinContainer = document.createElement('div');
-    trashbinContainer.id = 'trashbinContainer';
+            this.elementTitle = document.createElement('div');
+            this.elementTitle.classList.add('elementTitle');
 
-    const trashbin = new Image();
-    trashbin.id = 'trashbin';
-    trashbin.src = Frame;
+            this.elementDetails = document.createElement('div');
+            this.elementDetails.classList.add("elementDetails");
+            this.elementDetails.innerText = 'Details';
 
-    trashbinContainer.appendChild(trashbin);
 
-    elementContainer.appendChild(checkCircle);
-    elementContainer.appendChild(elementTitle);
-    elementContainer.appendChild(elementDetails);
-    elementContainer.appendChild(trashbinContainer);
+            this.elementDetailsTxt = document.createElement('div');
+            this.elementDetailsTxt.classList.add("elementDetailsTxt");
+            this.elementDetailsTxt.innerText = description;
+            
+            this.elementDateContainer = document.createElement('div');
+            this.elementDateContainer.classList.add('elementDateContainer');
+            this.elementDateContainer.innerText = format(new Date(date), 'MM/dd/yyyy');
 
-    return rightBottom.appendChild(elementContainer);
-}
+            this.trashbinContainer = document.createElement('div');
+            this.trashbinContainer.id = 'trashbinContainer';
 
-export {createElement};
+
+            this.trashbin = new Image();
+            this.trashbin.id = 'trashbin';
+           this.trashbin.src = Frame;
+
+            this.trashbinContainer.appendChild(this.trashbin);
+
+            this.elementTitle.innerText = title;
+
+            todoArray.push(this.elementContainer);
+
+            this.elementContainer.appendChild(this.checkCircle);
+            this.elementContainer.appendChild(this.elementTitle);
+            this.elementContainer.appendChild(this.elementDateContainer);
+            this.elementContainer.appendChild(this.elementDetails);
+            this.elementContainer.appendChild(this.trashbinContainer); 
+            this.elementContainer.appendChild(this.elementDetailsTxt);
+        }
+
+        addTodo(){
+            return todoContainer.appendChild(this.elementContainer);
+        }
+
+    }
+
+   
+   
+   
+
+export { todo };
+
+export { todoArray };

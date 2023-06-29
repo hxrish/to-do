@@ -2,8 +2,9 @@ import './index.css';
 import logo from './Vector.svg';
 import { pastContainer, presentContainer, futureContainer } from './timeline';
 import { projectHeader } from './projects';
-import { createElement } from './newToDo';
+import { createElement, todoArray } from './newToDo';
 import { popupContainer } from './popup';
+import { detailBodyDeadline, detailBodyDescription, detailBodyName, detailChildContainer, detailChildHeaderTitle, detailExitImg } from './detailChildContainer';
 
 
 //Assign variables
@@ -39,6 +40,9 @@ let mainLogoContainer = document.createElement('div');
 mainLogoContainer.id = 'mainLogoContainer';
 let mainLogoTxtContainer = document.createElement('div');
 mainLogoTxtContainer.id = 'mainLogoTxtContainer';
+
+let todoContainer = document.createElement('div');
+todoContainer.id = "todoContainer";
 
 
 let headerMainTxtContainer = document.createElement('div');
@@ -112,5 +116,74 @@ addAnythingCircle.addEventListener('click', () => {
     heroContainer.appendChild(popupContainer);
 })
 
+let detailContainer = document.createElement('div');
+detailContainer.id = "detailContainer";
+
+
+rightBottom.appendChild(todoContainer);
+// rightBottom.style.display = 'block';
+// rightBottom.style.padding = '0';
+
+// detailContainer.appendChild(detailChildContainer)
+
+
+// rightBottom.appendChild(detailContainer);
+   
+document.addEventListener('click', (e) => {
+    if (e.target.matches('div.elementDetails')){
+        // let elementIndex = todoArray.indexOf(e.target.parentNode);
+        let parentContainer = e.target.parentNode;
+        // // console.log(todoArray);
+        // parentContainer.querySelector('.elementTitle').innerText;
+        // rightBottom.style.display = 'relative';
+        // rightBottom.style.padding = '0'; 
+        detailChildHeaderTitle.innerText = 'Task Details';
+        detailBodyName.innerText = 'NAME: ' + parentContainer.querySelector('.elementTitle').innerText;
+        console.log(parentContainer);      
+        detailBodyDescription.innerText = 'Description: ' + parentContainer.querySelector('.elementDetailsTxt').innerText;
+        detailBodyDeadline.innerText = `Deadline: ` + parentContainer.querySelector('.elementDateContainer').innerText;
+        detailContainer.appendChild(detailChildContainer)
+
+        todoContainer.appendChild(detailContainer);
+    }
+    
+    else if(e.target.matches("img#trashbin")){
+        let parentContainer = e.target.parentNode.parentNode;
+        todoArray.splice(todoArray.indexOf(parentContainer), 1);
+        todoContainer.removeChild(parentContainer);
+    }
+
+    else if(e.target.matches("input.checkCircle")){
+      if(e.target.checked){
+        let parentContainer = e.target.parentNode;
+        let grandparentContainer = e.target.parentNode.parentNode;
+        let lastChild = grandparentContainer.lastChild;
+        // parentContainer.querySelector('.elementTitle').style.transition = 'ease-in-out 0.3s';
+        parentContainer.querySelector('.elementTitle').style.textDecoration = 'line-through';
+        parentContainer.querySelector('.elementDateContainer').style.textDecoration = 'line-through';
+        lastChild.after(parentContainer);
+
+        
+      }
+      else if(!e.target.checked){
+        let grandparentContainer = e.target.parentNode.parentNode;
+        let firstChild = grandparentContainer.firstChild;
+        let parentContainer = e.target.parentNode;
+        parentContainer.querySelector('.elementTitle').style.textDecoration = 'none';
+        parentContainer.querySelector('.elementDateContainer').style.textDecoration = 'none';
+        firstChild.after(parentContainer);
+      }
+
+    }
+})
+
+detailExitImg.addEventListener('click', () => {
+    detailContainer.removeChild(detailChildContainer);
+    todoContainer.removeChild(detailContainer);
+
+})
+
+
 export {rightBottom};
 export {heroContainer};
+export { todoContainer };

@@ -1,70 +1,92 @@
-import { format } from "date-fns";
-import { rightBottom, todoContainer } from ".";
+    import { format, isAfter, isBefore, isEqual, parseISO, parse} from "date-fns";
+    import { rightBottom, todoContainer } from ".";
 
 
-import Frame from './Frame.svg';
+    import Frame from './Frame.svg';
+
+    let todayDate = format(new Date(), 'MM/dd/yyyy');
 
 
-let todoArray =  [];
+    let todayArray =  [];
+    let pastArray = [];
+    let futureArray = [];
 
-    class todo {
-        constructor(title, description, date) {
-            this.elementContainer = document.createElement('div'
-            );  
-            this.elementContainer.classList.add('elementContainer');
+        class todo {
+            constructor(title, description, date) {
+                this.elementContainer = document.createElement('div'
+                );  
+                this.elementContainer.classList.add('elementContainer');
 
-            this.checkCircle = document.createElement('input');
-            this.checkCircle.type = 'checkbox';
-            this.checkCircle.classList.add('checkCircle');
+                this.checkCircle = document.createElement('input');
+                this.checkCircle.type = 'checkbox';
+                this.checkCircle.classList.add('checkCircle');
 
-            this.elementTitle = document.createElement('div');
-            this.elementTitle.classList.add('elementTitle');
+                this.elementTitle = document.createElement('div');
+                this.elementTitle.classList.add('elementTitle');
 
-            this.elementDetails = document.createElement('div');
-            this.elementDetails.classList.add("elementDetails");
-            this.elementDetails.innerText = 'Details';
-
-
-            this.elementDetailsTxt = document.createElement('div');
-            this.elementDetailsTxt.classList.add("elementDetailsTxt");
-            this.elementDetailsTxt.innerText = description;
-            
-            this.elementDateContainer = document.createElement('div');
-            this.elementDateContainer.classList.add('elementDateContainer');
-            this.elementDateContainer.innerText = format(new Date(date), 'MM/dd/yyyy');
-
-            this.trashbinContainer = document.createElement('div');
-            this.trashbinContainer.id = 'trashbinContainer';
+                this.elementDetails = document.createElement('div');
+                this.elementDetails.classList.add("elementDetails");
+                this.elementDetails.innerText = 'Details';
 
 
-            this.trashbin = new Image();
-            this.trashbin.id = 'trashbin';
-           this.trashbin.src = Frame;
+                this.elementDetailsTxt = document.createElement('div');
+                this.elementDetailsTxt.classList.add("elementDetailsTxt");
+                this.elementDetailsTxt.innerText = description;
+                
+                this.elementDateContainer = document.createElement('div');
+                this.elementDateContainer.classList.add('elementDateContainer');
+                this.elementDateContainer.innerText = format(new Date(date), 'MM/dd/yyyy');
 
-            this.trashbinContainer.appendChild(this.trashbin);
+                this.trashbinContainer = document.createElement('div');
+                this.trashbinContainer.id = 'trashbinContainer';
 
-            this.elementTitle.innerText = title;
 
-            todoArray.push(this.elementContainer);
+                this.trashbin = new Image();
+                this.trashbin.id = 'trashbin';
+            this.trashbin.src = Frame;   
 
-            this.elementContainer.appendChild(this.checkCircle);
-            this.elementContainer.appendChild(this.elementTitle);
-            this.elementContainer.appendChild(this.elementDateContainer);
-            this.elementContainer.appendChild(this.elementDetails);
-            this.elementContainer.appendChild(this.trashbinContainer); 
-            this.elementContainer.appendChild(this.elementDetailsTxt);
+                this.trashbinContainer.appendChild(this.trashbin);
+
+                this.elementTitle.innerText = title;
+
+
+                this.elementContainer.appendChild(this.checkCircle);
+                this.elementContainer.appendChild(this.elementTitle);
+                this.elementContainer.appendChild(this.elementDateContainer);
+                this.elementContainer.appendChild(this.elementDetails);
+                this.elementContainer.appendChild(this.trashbinContainer); 
+                this.elementContainer.appendChild(this.elementDetailsTxt);
+                if(isAfter(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), parse(todayDate,  'MM/dd/yyyy', new Date()))){
+                    futureArray.push(this.elementContainer);
+                }
+                else if(isBefore(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), parse(todayDate,  'MM/dd/yyyy', new Date()))){
+                    pastArray.push(this.elementContainer);
+                }
+                else if(isEqual(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), parse(todayDate,  'MM/dd/yyyy', new Date()))){
+                    todayArray.push(this.elementContainer);
+                }
+            }
+
+            addTodo(){
+                console.log(todayArray);
+                console.log(pastArray);
+                console.log(futureArray);
+                console.log(todayDate);
+                // return todoArray.forEach(element => {
+                //     for(let i = 0; i <= todoArray.length ; i++){
+                //         todoContainer.appendChild(element);
+                //     }
+                // })
+                // return todoContainer.appendChild(todoArray[todoArray.indexOf(this.elementContainer)]);
+            }
+
         }
 
-        addTodo(){
-            return todoContainer.appendChild(this.elementContainer);
-        }
+    
+    
+    export { todo };
+    export { todayArray };
+    export { pastArray };
+    export { futureArray };
 
-    }
-
-   
-   
-   
-
-export { todo };
-
-export { todoArray };
+    // export { todoArray };

@@ -2,7 +2,7 @@ import './index.css';
 import logo from './Vector.svg';
 import { pastContainer, presentContainer, futureContainer } from './timeline';
 import { projectHeader } from './projects';
-import { createElement, todoArray } from './newToDo';
+import { createElement, futureArray, pastArray, todayArray, todoArray } from './newToDo';
 import { popupContainer } from './popup';
 import { detailBodyDeadline, detailBodyDescription, detailBodyName, detailChildContainer, detailChildHeaderTitle, detailExitImg } from './detailChildContainer';
 
@@ -110,7 +110,51 @@ leftBottomTopChild(pastContainer);
 leftBottomTopChild(presentContainer);
 leftBottomTopChild(futureContainer);
 
+pastContainer.addEventListener('click', () => {
+    headerMainTxtContainer.innerText = '';
+    headerMainTxtContainer.innerText = 'Past';
+    todoContainer.innerHTML = '';
+
+    pastArray.forEach(element => {
+            for(let i = 0; i <= pastArray.length ; i++){
+                todoContainer.appendChild(element);
+            }
+        })
+})
+
+presentContainer.addEventListener('click', () => {
+    headerMainTxtContainer.innerText = '';
+    headerMainTxtContainer.innerText = 'Present';
+
+    todoContainer.innerHTML = '';
+
+    todayArray.forEach(element => {
+            for(let i = 0; i <= todayArray.length ; i++){
+                todoContainer.appendChild(element);
+            }
+        })
+})
+
+futureContainer.addEventListener('click', () => {
+    headerMainTxtContainer.innerText = '';
+    headerMainTxtContainer.innerText = 'Future' ;
+
+    todoContainer.innerHTML = '';
+
+    futureArray.forEach(element => {
+            for(let i = 0; i <= futureArray.length ; i++){
+                todoContainer.appendChild(element);
+            }
+        })
+})
+
+
+// let leftBottomProjects = document.createElement('div'); 
+// leftBottomProjects.Id("leftBottomProjects");
+
+
 leftBottomDownChild(projectHeader);
+// leftBottomChild(leftBottomProjects);
 
 addAnythingCircle.addEventListener('click', () => {
     heroContainer.appendChild(popupContainer);
@@ -149,7 +193,19 @@ document.addEventListener('click', (e) => {
     
     else if(e.target.matches("img#trashbin")){
         let parentContainer = e.target.parentNode.parentNode;
-        todoArray.splice(todoArray.indexOf(parentContainer), 1);
+        if(pastArray.includes(parentContainer)){
+            console.log('past');
+            pastArray.splice(pastArray.indexOf(parentContainer), 1);
+        }
+        else if(todayArray.includes(parentContainer)){
+            console.log('present')
+            todayArray.splice(todayArray.indexOf(parentContainer), 1);
+        }
+        else if(futureArray.includes(parentContainer)){
+            console.log('future');
+            futureArray.splice(futureArray.indexOf(parentContainer), 1)
+        }
+        // todoArray.splice(todoArray.indexOf(parentContainer), 1);
         todoContainer.removeChild(parentContainer);
     }
 
@@ -187,3 +243,4 @@ detailExitImg.addEventListener('click', () => {
 export {rightBottom};
 export {heroContainer};
 export { todoContainer };
+// export { leftBottomProjects };

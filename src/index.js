@@ -44,6 +44,13 @@ mainLogoTxtContainer.id = 'mainLogoTxtContainer';
 let todoContainer = document.createElement('div');
 todoContainer.id = "todoContainer";
 
+let projectsObj = {};
+
+let projects = document.createElement('div');
+projects.id = 'projects';
+let projectsArray = [];
+
+
 
 let headerMainTxtContainer = document.createElement('div');
 headerMainTxtContainer.id = 'headerMainTxtContainer';
@@ -74,6 +81,10 @@ function leftBottomTopChild(div){
 
 function leftBottomDownChild(div){
     return leftBottomDown.appendChild(div);
+}
+
+function projectsChild(div){
+    return projects.appendChild(div);
 }
 
 // function rightBottomChild(div){
@@ -148,12 +159,23 @@ futureContainer.addEventListener('click', () => {
         })
 })
 
+projects.addEventListener('click', () => {
+    if(headerMainTxtContainer.innerText in projectsObj){
+        projectsObj[headerMainTxtContainer.innerText].forEach(element => {
+            for(let i = 0; i <= projectsObj[headerMainTxtContainer.innerText].length ; i++){
+                todoContainer.appendChild(element);
+            }
+        })
+    }
+})
+
 
 // let leftBottomProjects = document.createElement('div'); 
 // leftBottomProjects.Id("leftBottomProjects");
 
 
 leftBottomDownChild(projectHeader);
+leftBottomDownChild(projects);
 // leftBottomChild(leftBottomProjects);
 
 addAnythingCircle.addEventListener('click', () => {
@@ -193,18 +215,32 @@ document.addEventListener('click', (e) => {
     
     else if(e.target.matches("img#trashbin")){
         let parentContainer = e.target.parentNode.parentNode;
+        console.log(parentContainer);
+
+        if(Object.keys(projectsObj).length > 0){
+        for(let i = 0; i<= Object.keys(projectsObj).length; i++){
+            if (projectsObj[Object.keys(projectsObj)[i]].includes(parentContainer)){
+                console.log('hi');
+                delete projectsObj[Object.keys(projectsObj)[i]];
+            }
+        }
+    }
+
         if(pastArray.includes(parentContainer)){
             console.log('past');
             pastArray.splice(pastArray.indexOf(parentContainer), 1);
         }
         else if(todayArray.includes(parentContainer)){
             console.log('present')
+            let a = todayArray.indexOf(parentContainer);
+            console.log(todayArray[a]);
             todayArray.splice(todayArray.indexOf(parentContainer), 1);
         }
         else if(futureArray.includes(parentContainer)){
             console.log('future');
             futureArray.splice(futureArray.indexOf(parentContainer), 1)
         }
+
         // todoArray.splice(todoArray.indexOf(parentContainer), 1);
         todoContainer.removeChild(parentContainer);
     }
@@ -239,8 +275,22 @@ detailExitImg.addEventListener('click', () => {
 
 })
 
+projects.addEventListener('click', (e) => {
+    headerMainTxtContainer.innerText = e.target.innerText;
+})
+
+window.addEventListener('click', () => {
+    console.log(projectsObj);
+})
+
 
 export {rightBottom};
 export {heroContainer};
 export { todoContainer };
 // export { leftBottomProjects };
+export {projectsChild};
+export {projectsArray};
+
+export {projectsObj};
+
+export { headerMainTxtContainer };

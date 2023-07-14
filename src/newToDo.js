@@ -1,5 +1,5 @@
     import { format, isAfter, isBefore, isEqual, parseISO, parse} from "date-fns";
-    import { rightBottom, todoContainer } from ".";
+    import { headerMainTxtContainer, projectsObj, rightBottom, todoContainer } from ".";
 
 
     import Frame from './Frame.svg';
@@ -56,6 +56,11 @@
                 this.elementContainer.appendChild(this.elementDetails);
                 this.elementContainer.appendChild(this.trashbinContainer); 
                 this.elementContainer.appendChild(this.elementDetailsTxt);
+
+                if(headerMainTxtContainer.innerText in projectsObj){
+                    projectsObj[headerMainTxtContainer.innerText].push(this.elementContainer);
+                }
+
                 if(isAfter(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), parse(todayDate,  'MM/dd/yyyy', new Date()))){
                     futureArray.push(this.elementContainer);
                 }

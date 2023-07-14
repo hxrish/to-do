@@ -1,7 +1,6 @@
-import { heroContainer, leftBottomProjects } from ".";
+import { heroContainer, leftBottomProjects, projectsArray, projectsChild, projectsObj } from ".";
 import { popupContainer } from "./popup";
 
-let projectObject = {};
 
 let projectForm = document.createElement('form');
 projectForm.id = "projectForm";
@@ -34,11 +33,19 @@ projectButtonContainer.appendChild(projectCloseBtn);
 projectForm.appendChild(projectNameContainer);
 projectForm.appendChild(projectButtonContainer);
 
+projectSubmitBtn.addEventListener('click', () => {
+    let element = document.createElement('div');
+    element.innerText = projectName.value;
+    projectsObj[element.innerText] = [];
+    projectsChild(element);
+    projectsArray.push(element.innerText);
+    projectName.value = '';
+    heroContainer.removeChild(popupContainer);
+}
+)
+
 projectCloseBtn.addEventListener('click', () => {
-    projectObject.projectName.value = [];
-
-    console.log(projectObject);
-
+    projectName.value = '';
     heroContainer.removeChild(popupContainer);
 })
 

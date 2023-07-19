@@ -1,4 +1,4 @@
-    import { format, isAfter, isBefore, isEqual, parseISO, parse} from "date-fns";
+    import { format, isAfter, isBefore, isEqual, parseISO, parse, differenceInDays, addDays} from "date-fns";
     import { headerMainTxtContainer, projectsObj, rightBottom, todoContainer } from ".";
 
 
@@ -57,26 +57,33 @@
                 this.elementContainer.appendChild(this.trashbinContainer); 
                 this.elementContainer.appendChild(this.elementDetailsTxt);
 
+                let difference = differenceInDays(parse(todayDate,  'MM/dd/yyyy', new Date()), parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()));
+
                 if(headerMainTxtContainer.innerText in projectsObj){
                     projectsObj[headerMainTxtContainer.innerText].push(this.elementContainer);
                 }
 
-                if(isAfter(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), parse(todayDate,  'MM/dd/yyyy', new Date()))){
+                if(isEqual(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), parse(todayDate,  'MM/dd/yyyy', new Date())) ||  difference <= -1){
+                    this.elementDateContainer.innerText = format(addDays(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), 1), 'MM/dd/yyyy')
                     futureArray.push(this.elementContainer);
                 }
-                else if(isBefore(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), parse(todayDate,  'MM/dd/yyyy', new Date()))){
-                    pastArray.push(this.elementContainer);
-                }
-                else if(isEqual(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), parse(todayDate,  'MM/dd/yyyy', new Date()))){
+                else if(isBefore(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), parse(todayDate,  'MM/dd/yyyy', new Date())) && difference <= 1){
+                    this.elementDateContainer.innerText = format(addDays(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), 1), 'MM/dd/yyyy')
+                    console.log(this.elementDateContainer.innerText);
                     todayArray.push(this.elementContainer);
+                }
+                else{
+                    this.elementDateContainer.innerText = format(addDays(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), 1), 'MM/dd/yyyy')
+                    console.log(this.elementDateContainer.innerText);
+                    pastArray.push(this.elementContainer);
                 }
             }
 
             addTodo(){
-                console.log(todayArray);
-                console.log(pastArray);
-                console.log(futureArray);
-                console.log(todayDate);
+                // console.log(todayArray);
+                // console.log(pastArray);
+                // console.log(futureArray);
+                // console.log(todayDate);
                 // return todoArray.forEach(element => {
                 //     for(let i = 0; i <= todoArray.length ; i++){
                 //         todoContainer.appendChild(element);

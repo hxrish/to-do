@@ -275,12 +275,17 @@ detailExitImg.addEventListener('click', () => {
 
 })
 
+localStorage.setItem('projectssChild', JSON.stringify(projectsChild));
+let projectData = JSON.parse(localStorage.getItem('projectssChild')); 
+
 projects.addEventListener('click', (e) => {
     headerMainTxtContainer.innerText = e.target.innerText;
 })
 
-window.addEventListener('click', () => {
-    console.log(projectsObj);
+window.addEventListener('load', () => {
+    for(let i = 0; i<= projectData.length ; i++){
+        projects.appendChild(projectData[i]);
+    }
 })
 
 

@@ -30,11 +30,6 @@ projectNameContainer.appendChild(projectName);
 projectButtonContainer.appendChild(projectSubmitBtn);
 projectButtonContainer.appendChild(projectCloseBtn);
 
-localStorage.setItem('projectssChild', JSON.stringify(projectsChild));
-let projectData = JSON.parse(localStorage.getItem("projectssChild") || "[]");
- 
-
-
 projectForm.appendChild(projectNameContainer);
 projectForm.appendChild(projectButtonContainer);
 
@@ -42,18 +37,14 @@ projectSubmitBtn.addEventListener('click', () => {
     let element = document.createElement('div');
     element.innerText = projectName.value;
     projectsObj[element.innerText] = [];
-    projectsChild.push(element);
-    projectsArray.push(element.innerText);
+    projectsChild(element);
+    projectsArray.push(element);
     projectName.value = '';
     heroContainer.removeChild(popupContainer);
-
-    for(let i=0; i<=0; i++){
-        projects.appendChild(projectsChild[i]);
-    }
+    console.log(projectsArray);
+    console.log(typeof(projectsArray));
 }
 )
-
-
 
 projectCloseBtn.addEventListener('click', () => {
     projectName.value = '';
@@ -64,4 +55,3 @@ export {projectForm}
 
 
 
-export {projectData};

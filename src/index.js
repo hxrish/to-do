@@ -211,6 +211,8 @@ document.addEventListener('click', (e) => {
         detailContainer.appendChild(detailChildContainer)
 
         todoContainer.appendChild(detailContainer);
+        todoContainer.style.paddingTop = '0';
+        todoContainer.style.paddingLeft = '0';
     }
     
     else if(e.target.matches("img#trashbin")){
@@ -269,24 +271,23 @@ document.addEventListener('click', (e) => {
     }
 })
 
+localStorage.setItem('fa', JSON.stringify(futureArray));
+
 detailExitImg.addEventListener('click', () => {
     detailContainer.removeChild(detailChildContainer);
     todoContainer.removeChild(detailContainer);
+    todoContainer.style.paddingTop = '50px';
+    todoContainer.style.paddingLeft = '50px';
 
 })
-
-localStorage.setItem('projectssChild', JSON.stringify(projectsChild));
-let projectData = JSON.parse(localStorage.getItem('projectssChild')); 
 
 projects.addEventListener('click', (e) => {
     headerMainTxtContainer.innerText = e.target.innerText;
 })
 
-window.addEventListener('load', () => {
-    for(let i = 0; i<= projectData.length ; i++){
-        projects.appendChild(projectData[i]);
-    }
-})
+// window.addEventListener('click', () => {
+//     console.log(projectsObj);
+// })
 
 
 export {rightBottom};

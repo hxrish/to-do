@@ -7,7 +7,6 @@ import { popupContainer } from './popup';
 import { detailBodyDeadline, detailBodyDescription, detailBodyName, detailChildContainer, detailChildHeaderTitle, detailExitImg } from './detailChildContainer';
 import { localDetail } from './taskAddBody';
 
-
 //Assign variables
 let heroContainer = document.getElementById('mainContent');
 let header = document.createElement('div');
@@ -122,9 +121,6 @@ leftBottomTopChild(pastContainer);
 leftBottomTopChild(presentContainer);
 leftBottomTopChild(futureContainer);
 
-for(let i = 0; i<= localDetail.length ; i++){
-    console.log(localDetail);
-}
 
 pastContainer.addEventListener('click', () => {
     headerMainTxtContainer.innerText = '';
@@ -173,6 +169,7 @@ projects.addEventListener('click', () => {
         })
     }
 })
+
 
 
 
@@ -255,6 +252,15 @@ document.addEventListener('click', (e) => {
 
     else if(e.target.matches("input.checkCircle")){
       if(e.target.checked){
+
+
+        for(let i = 0; i < localDetail.length ; i++){
+            if(localDetail[i].taskDescription == e.target.parentNode.getElementsByTagName('div')[4].innerText && localDetail[i].taskTitle == e.target.parentNode.getElementsByTagName('div')[0].innerText    ){
+                console.log('WTF IT WORKE!! ')
+            }
+        }
+
+        console.log(e.target.parentNode.getElementsByTagName('div')[1].innerText);
         let parentContainer = e.target.parentNode;
         let grandparentContainer = e.target.parentNode.parentNode;
         let lastChild = grandparentContainer.lastChild;

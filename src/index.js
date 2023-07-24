@@ -2,9 +2,10 @@ import './index.css';
 import logo from './Vector.svg';
 import { pastContainer, presentContainer, futureContainer } from './timeline';
 import { projectHeader } from './projects';
-import { createElement, futureArray, pastArray, todayArray, todoArray } from './newToDo';
+import { createElement, futureArray, pastArray, todayArray, todo, todoArray } from './newToDo';
 import { popupContainer } from './popup';
 import { detailBodyDeadline, detailBodyDescription, detailBodyName, detailChildContainer, detailChildHeaderTitle, detailExitImg } from './detailChildContainer';
+import { localDetail } from './taskAddBody';
 
 
 //Assign variables
@@ -121,6 +122,10 @@ leftBottomTopChild(pastContainer);
 leftBottomTopChild(presentContainer);
 leftBottomTopChild(futureContainer);
 
+for(let i = 0; i<= localDetail.length ; i++){
+    console.log(localDetail);
+}
+
 pastContainer.addEventListener('click', () => {
     headerMainTxtContainer.innerText = '';
     headerMainTxtContainer.innerText = 'Past';
@@ -168,6 +173,7 @@ projects.addEventListener('click', () => {
         })
     }
 })
+
 
 
 // let leftBottomProjects = document.createElement('div'); 
@@ -271,7 +277,6 @@ document.addEventListener('click', (e) => {
     }
 })
 
-localStorage.setItem('fa', JSON.stringify(futureArray));
 
 detailExitImg.addEventListener('click', () => {
     detailContainer.removeChild(detailChildContainer);

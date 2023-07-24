@@ -5,6 +5,19 @@ import { popupContainer } from "./popup";
 let localDetail = JSON.parse(localStorage.getItem('localDetail')) || [];
 
 
+const addDetails = (taskTitle, taskDescription, taskDate) => {
+    localDetail.push({
+      taskTitle,
+      taskDescription,
+      taskDate,
+    });
+  
+    localStorage.setItem("localDetail", JSON.stringify(localDetail));
+  
+    return { taskTitle, taskDescription, taskDate };
+  };
+
+
 let formParent = document.createElement('form');
 formParent.id = 'formParent';
 
@@ -91,14 +104,32 @@ closeBtn.addEventListener('click', () => {
 })
 
 submitBtn.addEventListener('click', () => {
-    // console.log(taskDescription.value);
 
-    localDetail.push(taskTitle.value, taskDescription.value, taskDate.value);
-    localStorage.setItem('localDetail', JSON.stringify(localDetail));
-    console.log(taskDate.value);
-    let element = new todo(taskTitle.value, taskDescription.value, taskDate.value);
+
+    if(taskDate.value != ''){
+       
+   
+    console.log(taskDescription.value);
+
+    const newDetails = addDetails(
+        taskTitle.value,
+        taskDescription.value,
+        taskDate.value
+      );
+
+
+
+
+      for(let i = 0; i< localDetail.length ; i++){
+        new todo(localDetail[i].taskTitle, localDetail[i].taskDescription, localDetail[i].taskDate);
+      }
+    
+
+    // let element = new todo(taskTitle.value, taskDescription.value, taskDate.value);
     heroContainer.removeChild(popupContainer);
     // element.addTodo();
+    }
+    return
 })
 
 

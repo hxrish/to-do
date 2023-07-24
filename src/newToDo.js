@@ -9,7 +9,7 @@
 
     let todayArray =  [];
     let pastArray = [];
-    let futureArray = new Array();
+    let futureArray = [];
 
         class todo {
             constructor(title, description, date) {
@@ -66,10 +66,6 @@
                 if(isEqual(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), parse(todayDate,  'MM/dd/yyyy', new Date())) ||  difference <= -1){
                     this.elementDateContainer.innerText = format(addDays(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), 1), 'MM/dd/yyyy')
                     futureArray.push(this.elementContainer);
-                    localStorage.setItem('fa', JSON.stringify(futureArray));
-                    console.log(JSON.parse(localStorage.getItem('fa')));
-                    console.log(typeof(futureArray));
-                    console.log(futureArray);
 
 
                 }
@@ -86,6 +82,7 @@
 
               
             }
+            
 
             addTodo(){
                 // console.log(todayArray);

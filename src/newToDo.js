@@ -1,7 +1,6 @@
     import { format, isAfter, isBefore, isEqual, parseISO, parse, differenceInDays, addDays} from "date-fns";
     import { headerMainTxtContainer, projectsObj, rightBottom, todoContainer } from ".";
 
-
     import Frame from './Frame.svg';
 
     let todayDate = format(new Date(), 'MM/dd/yyyy');
@@ -12,6 +11,7 @@
     let futureArray = [];
 
         class todo {
+
             constructor(title, description, date) {
                 this.elementContainer = document.createElement('div'
                 );  
@@ -59,9 +59,31 @@
 
                 let difference = differenceInDays(parse(todayDate,  'MM/dd/yyyy', new Date()), parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()));
 
-                if(headerMainTxtContainer.innerText in projectsObj){
-                    projectsObj[headerMainTxtContainer.innerText].push(this.elementContainer);
-                }
+                // if(headerMainTxtContainer.innerText in projectsObj){
+                //     projectsObj[headerMainTxtContainer.innerText].push(this.elementContainer);
+                // }
+
+                        // for(let i = 0 ; i <= projectsObj.length ; i++){
+                        //     console.log(projectsObj[i]);
+                        // }
+
+                        // console.log(projectsObj[headerMainTxtContainer.innerText]);
+                //         console.log(projectsObj);
+
+                      
+
+                //         return { taskTitle, taskDescription, taskDate };
+
+                    
+                //     }
+                        
+                //     const newDetails = projectAddToObj(
+                //         title,
+                //         description,
+                //         date
+                //       );
+                //     return
+                // }
 
                 if(isEqual(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), parse(todayDate,  'MM/dd/yyyy', new Date())) ||  difference <= -1){
                     this.elementDateContainer.innerText = format(addDays(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), 1), 'MM/dd/yyyy')
@@ -71,34 +93,36 @@
                 }
                 else if(isBefore(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), parse(todayDate,  'MM/dd/yyyy', new Date())) && difference <= 1){
                     this.elementDateContainer.innerText = format(addDays(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), 1), 'MM/dd/yyyy')
-                    console.log(this.elementDateContainer.innerText);
+                    // console.log(this.elementDateContainer.innerText);
                     todayArray.push(this.elementContainer);
                 }
                 else{
                     this.elementDateContainer.innerText = format(addDays(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), 1), 'MM/dd/yyyy')
-                    console.log(this.elementDateContainer.innerText);
+                    // console.log(this.elementDateContainer.innerText);
                     pastArray.push(this.elementContainer);
                 }
 
               
             }
+        }
             
 
-            addTodo(){
-                // console.log(todayArray);
-                // console.log(pastArray);
-                // console.log(futureArray);
-                // console.log(todayDate);
-                // return todoArray.forEach(element => {
-                //     for(let i = 0; i <= todoArray.length ; i++){
-                //         todoContainer.appendChild(element);
-                //     }
-                // })
-                // return todoContainer.appendChild(todoArray[todoArray.indexOf(this.elementContainer)]);
-            }
+            // addTodo(){
+            //     // console.log(todayArray);
+            //     // console.log(pastArray);
+            //     // console.log(futureArray);
+            //     // console.log(todayDate);
+            //     // return todoArray.forEach(element => {
+            //     //     for(let i = 0; i <= todoArray.length ; i++){
+            //     //         todoContainer.appendChild(element);
+            //     //     }
+            //     // })
+            //     // return todoContainer.appendChild(todoArray[todoArray.indexOf(this.elementContainer)]);
+            // }
 
-        }
+            
 
+        
     
     
     export { todo };

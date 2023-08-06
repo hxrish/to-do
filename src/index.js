@@ -171,6 +171,15 @@ projects.addEventListener('click', () => {
 })
 
 
+window.addEventListener('load', () => {
+    // localStorage.clear();
+    if(localDetail.length > 0){
+        for(let i = 0;  i < localDetail.length ; i++){
+            new todo(localDetail[i].taskTitle, localDetail[i].taskDescription, localDetail[i].taskDate);
+        }
+    }
+})
+
 
 
 // let leftBottomProjects = document.createElement('div'); 
@@ -222,6 +231,15 @@ document.addEventListener('click', (e) => {
         let parentContainer = e.target.parentNode.parentNode;
         console.log(parentContainer);
 
+
+        for(let i = 0; i < localDetail.length ; i++){
+            if(localDetail[i].taskDescription == parentContainer.getElementsByTagName('div')[4].innerText && localDetail[i].taskTitle == parentContainer.getElementsByTagName('div')[0].innerText    ){
+                localDetail.splice(i, 1);
+                localStorage.clear();
+                localStorage.setItem("localDetail", JSON.stringify(localDetail));
+            }
+        }
+
         if(Object.keys(projectsObj).length > 0){
         for(let i = 0; i<= Object.keys(projectsObj).length; i++){
             if (projectsObj[Object.keys(projectsObj)[i]].includes(parentContainer)){
@@ -256,11 +274,13 @@ document.addEventListener('click', (e) => {
 
         for(let i = 0; i < localDetail.length ; i++){
             if(localDetail[i].taskDescription == e.target.parentNode.getElementsByTagName('div')[4].innerText && localDetail[i].taskTitle == e.target.parentNode.getElementsByTagName('div')[0].innerText    ){
-                console.log('WTF IT WORKE!! ')
+                localDetail.splice(i, 1);
+                localStorage.clear();
+                localStorage.setItem("localDetail", JSON.stringify(localDetail));
             }
         }
 
-        console.log(e.target.parentNode.getElementsByTagName('div')[1].innerText);
+        // console.log(e.target.parentNode.getElementsByTagName('div')[1].innerText);
         let parentContainer = e.target.parentNode;
         let grandparentContainer = e.target.parentNode.parentNode;
         let lastChild = grandparentContainer.lastChild;
@@ -296,6 +316,73 @@ projects.addEventListener('click', (e) => {
     headerMainTxtContainer.innerText = e.target.innerText;
 })
 
+function addToProjects(title, description, date) {
+    this.elementContainer = document.createElement('div'
+    );  
+    this.elementContainer.classList.add('elementContainer');
+
+    this.checkCircle = document.createElement('input');
+    this.checkCircle.type = 'checkbox';
+    this.checkCircle.classList.add('checkCircle');
+
+    this.elementTitle = document.createElement('div');
+    this.elementTitle.classList.add('elementTitle');
+
+    this.elementDetails = document.createElement('div');
+    this.elementDetails.classList.add("elementDetails");
+    this.elementDetails.innerText = 'Details';
+
+
+    this.elementDetailsTxt = document.createElement('div');
+    this.elementDetailsTxt.classList.add("elementDetailsTxt");
+    this.elementDetailsTxt.innerText = description;
+    
+    this.elementDateContainer = document.createElement('div');
+    this.elementDateContainer.classList.add('elementDateContainer');
+    this.elementDateContainer.innerText = format(new Date(date), 'MM/dd/yyyy');
+
+    this.trashbinContainer = document.createElement('div');
+    this.trashbinContainer.id = 'trashbinContainer';
+
+
+    this.trashbin = new Image();
+    this.trashbin.id = 'trashbin';
+this.trashbin.src = Frame;   
+
+    this.trashbinContainer.appendChild(this.trashbin);
+
+    this.elementTitle.innerText = title;
+
+
+    this.elementContainer.appendChild(this.checkCircle);
+    this.elementContainer.appendChild(this.elementTitle);
+    this.elementContainer.appendChild(this.elementDateContainer);
+    this.elementContainer.appendChild(this.elementDetails);
+    this.elementContainer.appendChild(this.trashbinContainer); 
+    this.elementContainer.appendChild(this.elementDetailsTxt);
+
+    let difference = differenceInDays(parse(todayDate,  'MM/dd/yyyy', new Date()), parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()));
+
+    projectsObj[headerMainTxtContainer.innerText].push(this.elementContainer);
+
+    if(isEqual(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), parse(todayDate,  'MM/dd/yyyy', new Date())) ||  difference <= -1){
+        this.elementDateContainer.innerText = format(addDays(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), 1), 'MM/dd/yyyy')
+        futureArray.push(this.elementContainer);
+
+
+    }
+    else if(isBefore(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), parse(todayDate,  'MM/dd/yyyy', new Date())) && difference <= 1){
+        this.elementDateContainer.innerText = format(addDays(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), 1), 'MM/dd/yyyy')
+        // console.log(this.elementDateContainer.innerText);
+        todayArray.push(this.elementContainer);
+    }
+    else{
+        this.elementDateContainer.innerText = format(addDays(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), 1), 'MM/dd/yyyy')
+        // console.log(this.elementDateContainer.innerText);
+        pastArray.push(this.elementContainer);
+    }
+    }
+
 // window.addEventListener('click', () => {
 //     console.log(projectsObj);
 // })
@@ -311,3 +398,4 @@ export {projectsArray};
 export {projectsObj};
 
 export { headerMainTxtContainer };
+export { addToProjects };

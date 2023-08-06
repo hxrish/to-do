@@ -1,5 +1,5 @@
-import { heroContainer } from ".";
-import { todo } from "./newToDo";
+import { headerMainTxtContainer, heroContainer, projectsObj } from ".";
+import { futureArray, todo } from "./newToDo";
 import { popupContainer } from "./popup";
 
 let localDetail = JSON.parse(localStorage.getItem('localDetail')) || [];
@@ -16,6 +16,18 @@ const addDetails = (taskTitle, taskDescription, taskDate) => {
   
     return { taskTitle, taskDescription, taskDate };
   };
+
+  const addProjectDetails = (projectTitle, projectDescription, projectDate) => {
+    projectsObj[headerMainTxtContainer.innerText].push({
+      projectTitle,
+      projectDescription,
+      projectDate
+    })
+
+    return { projectTitle, projectDescription, projectDate };
+  }
+
+
 
 
 let formParent = document.createElement('form');
@@ -105,27 +117,39 @@ closeBtn.addEventListener('click', () => {
 
 submitBtn.addEventListener('click', () => {
 
+  if(headerMainTxtContainer.innerText in projectsObj && taskDate.value != ''){
+    const projectAddDetail = addProjectDetails(
+      taskTitle.value, 
+      taskDescription.value,
+      taskDate.value
+    )
+
+    for(let i = 0; i < projectsObj.length ; i++){
+    new todo(projectsObj[headerMainTxtContainer.innerText][i].projectTitle, projectsObj[headerMainTxtContainer.innerText][i].projectDescription, projectsObj[headerMainTxtContainer.innerText][i].projectDate);
+    }
+}
+
+  
 
     if(taskDate.value != ''){
        
    
-    console.log(taskDescription.value);
+    // console.log(taskDescription.value);
+
+    
 
     const newDetails = addDetails(
         taskTitle.value,
         taskDescription.value,
         taskDate.value
       );
-
-
-
-
-      for(let i = 0; i< localDetail.length ; i++){
-        new todo(localDetail[i].taskTitle, localDetail[i].taskDescription, localDetail[i].taskDate);
-      }
     
 
-    // let element = new todo(taskTitle.value, taskDescription.value, taskDate.value);
+
+        // new todo(localDetail[i].taskTitle, localDetail[i].taskDescription, localDetail[i].taskDate);
+      
+    
+    let element = new todo(taskTitle.value, taskDescription.value, taskDate.value);
     heroContainer.removeChild(popupContainer);
     // element.addTodo();
     }

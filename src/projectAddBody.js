@@ -2,6 +2,8 @@ import { heroContainer, leftBottomProjects, projects, projectsArray, projectsChi
 import { popupContainer } from "./popup";
 
 
+
+
 let projectForm = document.createElement('form');
 projectForm.id = "projectForm";
 
@@ -38,7 +40,7 @@ projectSubmitBtn.addEventListener('click', () => {
     element.innerText = projectName.value;
     projectsObj[element.innerText] = [];
     projectsChild(element);
-    projectsArray.push(element);
+    // projectsArray.push(element);
     projectName.value = '';
     heroContainer.removeChild(popupContainer);
     console.log(projectsArray);
@@ -51,7 +53,13 @@ projectCloseBtn.addEventListener('click', () => {
     heroContainer.removeChild(popupContainer);
 })
 
-export {projectForm}
+// let sentByProject = false;
+
+
+// export {sentByProject};
+export {projectForm};
+export { projectsObj };
+
 
 
 

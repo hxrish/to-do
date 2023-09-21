@@ -59,15 +59,20 @@
 
                 let difference = differenceInDays(parse(todayDate,  'MM/dd/yyyy', new Date()), parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()));
 
-                // if(headerMainTxtContainer.innerText in projectsObj){
-                //     projectsObj[headerMainTxtContainer.innerText].push(this.elementContainer);
-                // }
+                if(headerMainTxtContainer.innerText in projectsObj){
+                    console.log('it is working');
+                    console.log(this.elementContainer);
+                    projectsObj[headerMainTxtContainer.innerText].push(this.elementContainer);
+                    console.log(projectsObj);
+                    
+                    todoContainer.appendChild(this.elementContainer);
+                }   
 
-                        // for(let i = 0 ; i <= projectsObj.length ; i++){
-                        //     console.log(projectsObj[i]);
-                        // }
+                //         for(let i = 0 ; i <= projectsObj.length ; i++){
+                //             console.log(projectsObj[i]);
+                //         }
 
-                        // console.log(projectsObj[headerMainTxtContainer.innerText]);
+                //         console.log(projectsObj[headerMainTxtContainer.innerText]);
                 //         console.log(projectsObj);
 
                       
@@ -88,6 +93,9 @@
                 if(isEqual(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), parse(todayDate,  'MM/dd/yyyy', new Date())) ||  difference <= -1){
                     this.elementDateContainer.innerText = format(addDays(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), 1), 'MM/dd/yyyy')
                     futureArray.push(this.elementContainer);
+                    console.log(futureArray);
+                    todoContainer.appendChild(this.elementContainer);
+
 
 
                 }
@@ -95,11 +103,14 @@
                     this.elementDateContainer.innerText = format(addDays(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), 1), 'MM/dd/yyyy')
                     // console.log(this.elementDateContainer.innerText);
                     todayArray.push(this.elementContainer);
+                    todoContainer.appendChild(this.elementContainer);
+
                 }
                 else{
                     this.elementDateContainer.innerText = format(addDays(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), 1), 'MM/dd/yyyy')
                     // console.log(this.elementDateContainer.innerText);
                     pastArray.push(this.elementContainer);
+                    todoContainer.appendChild(this.elementContainer);
                 }
 
               

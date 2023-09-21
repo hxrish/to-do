@@ -17,15 +17,7 @@ const addDetails = (taskTitle, taskDescription, taskDate) => {
     return { taskTitle, taskDescription, taskDate };
   };
 
-  const addProjectDetails = (projectTitle, projectDescription, projectDate) => {
-    projectsObj[headerMainTxtContainer.innerText].push({
-      projectTitle,
-      projectDescription,
-      projectDate
-    })
-
-    return { projectTitle, projectDescription, projectDate };
-  }
+  
 
 
 
@@ -118,15 +110,15 @@ closeBtn.addEventListener('click', () => {
 submitBtn.addEventListener('click', () => {
 
   if(headerMainTxtContainer.innerText in projectsObj && taskDate.value != ''){
-    const projectAddDetail = addProjectDetails(
-      taskTitle.value, 
-      taskDescription.value,
-      taskDate.value
-    )
+    // const projectAddDetail = addProjectDetails(
+    //   taskTitle.value, 
+    //   taskDescription.value,
+    //   taskDate.value
+    // )
 
-    for(let i = 0; i < projectsObj.length ; i++){
-    new todo(projectsObj[headerMainTxtContainer.innerText][i].projectTitle, projectsObj[headerMainTxtContainer.innerText][i].projectDescription, projectsObj[headerMainTxtContainer.innerText][i].projectDate);
-    }
+    // for(let i = 0; i < projectsObj.length ; i++){
+    // new todo(projectsObj[headerMainTxtContainer.innerText][i].projectTitle, projectsObj[headerMainTxtContainer.innerText][i].projectDescription, projectsObj[headerMainTxtContainer.innerText][i].projectDate);
+    // }
 }
 
   

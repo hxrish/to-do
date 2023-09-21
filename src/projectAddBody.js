@@ -2,6 +2,7 @@ import { heroContainer, leftBottomProjects, projects, projectsArray, projectsChi
 import { popupContainer } from "./popup";
 
 
+let projectDetail = JSON.parse(localStorage.getItem('projectDetail')) || [];
 
 
 let projectForm = document.createElement('form');
@@ -39,6 +40,7 @@ projectSubmitBtn.addEventListener('click', () => {
     let element = document.createElement('div');
     element.innerText = projectName.value;
     projectsObj[element.innerText] = [];
+    console.log(projectsObj);
     projectsChild(element);
     // projectsArray.push(element);
     projectName.value = '';
@@ -59,7 +61,7 @@ projectCloseBtn.addEventListener('click', () => {
 // export {sentByProject};
 export {projectForm};
 export { projectsObj };
-
+export { projectDetail };
 
 
 

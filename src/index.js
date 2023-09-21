@@ -134,6 +134,21 @@ pastContainer.addEventListener('click', () => {
         })
 })
 
+
+
+
+// window.addEventListener('click', () => {
+//     if(headerMainTxtContainer.innerText in projectsObj){
+//         for(let i = 0; i<= projectsObj[headerMainTxtContainer.innerText].length ; i++){
+//             if(i % 2 != 0){
+//                 todoContainer.appendChild(projectsObj[headerMainTxtContainer.innerText][i])
+//             }
+//         }
+//     }
+// })
+
+
+
 presentContainer.addEventListener('click', () => {
     headerMainTxtContainer.innerText = '';
     headerMainTxtContainer.innerText = 'Present';
@@ -382,6 +397,19 @@ this.trashbin.src = Frame;
         pastArray.push(this.elementContainer);
     }
     }
+
+    projects.addEventListener('click', () => {
+        if(headerMainTxtContainer.innerText in projectsObj){
+
+    todoContainer.innerHTML = '';
+
+    projectsObj[headerMainTxtContainer.innerText].forEach(element => {
+            for(let i = 0; i <= projectsObj[headerMainTxtContainer.innerText].length ; i++){
+                todoContainer.appendChild(element);
+            }
+        })
+        }
+    })
 
 // window.addEventListener('click', () => {
 //     console.log(projectsObj);

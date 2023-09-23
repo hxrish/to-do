@@ -2,7 +2,7 @@ import './index.css';
 import logo from './Vector.svg';
 import { pastContainer, presentContainer, futureContainer } from './timeline';
 import { projectHeader } from './projects';
-import { createElement, futureArray, pastArray, todayArray, todo, todoArray } from './newToDo';
+import { createElement, futureArray, pastArray, todayArray, todo, todoArray, unga } from './newToDo';
 import { popupContainer } from './popup';
 import { detailBodyDeadline, detailBodyDescription, detailBodyName, detailChildContainer, detailChildHeaderTitle, detailExitImg } from './detailChildContainer';
 import { localDetail } from './taskAddBody';
@@ -186,14 +186,24 @@ projects.addEventListener('click', () => {
 })
 
 
-window.addEventListener('load', () => {
-    // localStorage.clear();
-    if(localDetail.length > 0){
-        for(let i = 0;  i < localDetail.length ; i++){
-            new todo(localDetail[i].taskTitle, localDetail[i].taskDescription, localDetail[i].taskDate);
-        }
+
+
+
+window.addEventListener('keydown', (e) => {
+    if(e.keyCode ==  65){
+        let b = JSON.stringify(projectsObj);
+                console.log(JSON.parse(b))
+                console.log(projectsObj)
     }
+    // localStorage.clear();
+    // if(localDetail.length > 0){
+    //     for(let i = 0;  i < localDetail.length ; i++){
+    //         new todo(localDetail[i].taskTitle, localDetail[i].taskDescription, localDetail[i].taskDate);
+    //     }
+    // }
 })
+
+
 
 
 
@@ -232,7 +242,7 @@ document.addEventListener('click', (e) => {
         // rightBottom.style.padding = '0'; 
         detailChildHeaderTitle.innerText = 'Task Details';
         detailBodyName.innerText = 'NAME: ' + parentContainer.querySelector('.elementTitle').innerText;
-        console.log(parentContainer);      
+        // console.log(parentContainer);      
         detailBodyDescription.innerText = 'Description: ' + parentContainer.querySelector('.elementDetailsTxt').innerText;
         detailBodyDeadline.innerText = `Deadline: ` + parentContainer.querySelector('.elementDateContainer').innerText;
         detailContainer.appendChild(detailChildContainer)
@@ -244,7 +254,7 @@ document.addEventListener('click', (e) => {
     
     else if(e.target.matches("img#trashbin")){
         let parentContainer = e.target.parentNode.parentNode;
-        console.log(parentContainer);
+        // console.log(parentContainer);
 
 
         for(let i = 0; i < localDetail.length ; i++){
@@ -258,24 +268,24 @@ document.addEventListener('click', (e) => {
         if(Object.keys(projectsObj).length > 0){
         for(let i = 0; i<= Object.keys(projectsObj).length; i++){
             if (projectsObj[Object.keys(projectsObj)[i]].includes(parentContainer)){
-                console.log('hi');
+                // console.log('hi');
                 delete projectsObj[Object.keys(projectsObj)[i]];
             }
         }
     }
 
         if(pastArray.includes(parentContainer)){
-            console.log('past');
+            // console.log('past');
             pastArray.splice(pastArray.indexOf(parentContainer), 1);
         }
         else if(todayArray.includes(parentContainer)){
-            console.log('present')
+            // console.log('present')
             let a = todayArray.indexOf(parentContainer);
-            console.log(todayArray[a]);
+            // console.log(todayArray[a]);
             todayArray.splice(todayArray.indexOf(parentContainer), 1);
         }
         else if(futureArray.includes(parentContainer)){
-            console.log('future');
+        //   consolesole.log('future');
             futureArray.splice(futureArray.indexOf(parentContainer), 1)
         }
 

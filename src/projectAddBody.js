@@ -40,13 +40,13 @@ projectSubmitBtn.addEventListener('click', () => {
     let element = document.createElement('div');
     element.innerText = projectName.value;
     projectsObj[element.innerText] = [];
-    console.log(projectsObj);
+    // console.log(projectsObj);
     projectsChild(element);
     // projectsArray.push(element);
     projectName.value = '';
     heroContainer.removeChild(popupContainer);
-    console.log(projectsArray);
-    console.log(typeof(projectsArray));
+    // console.log(projectsArray);
+    // console.log(typeof(projectsArray));
 }
 )
 

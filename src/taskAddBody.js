@@ -17,11 +17,6 @@ const addDetails = (taskTitle, taskDescription, taskDate) => {
     return { taskTitle, taskDescription, taskDate };
   };
 
-  
-
-
-
-
 let formParent = document.createElement('form');
 formParent.id = 'formParent';
 

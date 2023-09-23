@@ -6,6 +6,7 @@
     let todayDate = format(new Date(), 'MM/dd/yyyy');
 
 
+
     let todayArray =  [];
     let pastArray = [];
     let futureArray = [];
@@ -60,40 +61,24 @@
                 let difference = differenceInDays(parse(todayDate,  'MM/dd/yyyy', new Date()), parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()));
 
                 if(headerMainTxtContainer.innerText in projectsObj){
-                    console.log('it is working');
-                    console.log(this.elementContainer);
+                    // console.log('it is working');
+                    // console.log(this.elementContainer);
                     projectsObj[headerMainTxtContainer.innerText].push(this.elementContainer);
-                    console.log(projectsObj);
+                    // console.log(projectsObj);
                     
                     todoContainer.appendChild(this.elementContainer);
+
+
+                    return
                 }   
-
-                //         for(let i = 0 ; i <= projectsObj.length ; i++){
-                //             console.log(projectsObj[i]);
-                //         }
-
-                //         console.log(projectsObj[headerMainTxtContainer.innerText]);
-                //         console.log(projectsObj);
-
-                      
-
-                //         return { taskTitle, taskDescription, taskDate };
-
                     
-                //     }
-                        
-                //     const newDetails = projectAddToObj(
-                //         title,
-                //         description,
-                //         date
-                //       );
-                //     return
-                // }
+            
+                                    
 
                 if(isEqual(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), parse(todayDate,  'MM/dd/yyyy', new Date())) ||  difference <= -1){
                     this.elementDateContainer.innerText = format(addDays(parse(this.elementDateContainer.innerText, 'MM/dd/yyyy', new Date()), 1), 'MM/dd/yyyy')
                     futureArray.push(this.elementContainer);
-                    console.log(futureArray);
+                    // console.log(futureArray);
                     todoContainer.appendChild(this.elementContainer);
 
 
